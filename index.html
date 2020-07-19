@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Rock-Paper-Scissors</title>
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> 
         <link rel="stylesheet" href="styles/reset.css">
         <link rel="stylesheet" href="styles/style.css">
         <script src="https://kit.fontawesome.com/a9a7b0e0c1.js" crossorigin="anonymous"></script>
@@ -13,8 +14,10 @@
 
             <h1 class="game-title">Rock Paper Scissors</h1>
             
-            <div class="scores">
-                <h2>Score</h3>
+            <div class="screen">
+
+                <div class="scores">
+                    <h2>Score</h3>
                     <div class="wins">
                         <p>Wins:</p>
                         <p>0</p>
@@ -27,10 +30,32 @@
                         <p>Losses:</p>
                         <p>0</p>
                     </div>
-                <button id="restart">Restart</button>
+                </div>
+                    
+                <div class="results">
+                    <div class="column">
+                        <h2 class="column__title">Player</h2>
+                        <p class="column__paragraph player-choice">ROCK</p>
+                    </div>
+                    <div class="column">
+                        <h2 class="column__title"></h2>
+                        <p class="column__paragraph">X</p>
+                    </div>
+                    <div class="column">
+                        <h2 class="column__title">Computer</h2>
+                        <p class="column__paragraph computer-choice">SCISSORS</p>
+                    </div>
+                    
+                </div>
+                <p class="result"></p>
+                    
+                <div class="overall-result">
+
+                </div>
+                    
+                    
+                    
             </div>
-                
-                
             <div class="buttons">
                 <h2>Make a choice</h2>
                 <button id="rock" class="choice">
@@ -42,17 +67,10 @@
                 <button id="scissors" class="choice">
                     <i class="fa fa-hand-scissors-o" aria-hidden="true"></i>
                 </button>
-            </div>
-                
-            <div class="results">
-                <p class="player-choice"></p>
-                <p class="computer-choice"></p>
-                <p class="result"></p>
-            </div>
             
-            <div class="overall-result">
-                
+                <button id="restart">Restart</button>
             </div>
+
         </div>
                 
         <script src="scripts/script.js"></script>
