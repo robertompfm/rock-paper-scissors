@@ -31,8 +31,12 @@
                         <p>0</p>
                     </div>
                 </div>
+
+                <div class="turn">
+                    <p>Your turn!</p>
+                </div>
                     
-                <div class="results">
+                <div class="choices">
                     <div class="column">
                         <h2 class="column__title">Player</h2>
                         <p class="column__paragraph player-choice">ROCK</p>
@@ -43,32 +47,41 @@
                     </div>
                     <div class="column">
                         <h2 class="column__title">Computer</h2>
-                        <p class="column__paragraph computer-choice">SCISSORS</p>
+                        <p class="column__paragraph computer-choice">ROCK</p>
                     </div>
                     
                 </div>
-                <p class="result"></p>
-                    
-                <div class="overall-result">
 
-                </div>
-                    
-                    
+                <div class="results">
+                    <div class="results__row">
+                        <p class="feedback">It's a tie! Both played Rock</p>
+                    </div>
+                    <div class="results__row">
+                        <p class="result">You're the Champion!! You won 5 games first :D</p>
+                    </div>
+                </div>                    
                     
             </div>
+
             <div class="buttons">
                 <h2>Make a choice</h2>
-                <button id="rock" class="choice">
-                    <i class="fa fa-hand-rock-o" aria-hidden="true"></i>
-                </button>
-                <button id="paper" class="choice">
-                    <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
-                </button>
-                <button id="scissors" class="choice">
-                    <i class="fa fa-hand-scissors-o" aria-hidden="true"></i>
-                </button>
+                <div class="choice-buttons">
+                    <button id="rock" class="choice-btn fa fa-hand-rock-o">
+                    </button>
+                    <button id="paper" class="choice-btn fa fa-hand-paper-o">
+                    </button>
+                    <button id="scissors" class="choice-btn fa fa-hand-scissors-o">
+                    </button>
+                </div>
+                <div class="general-buttons">
+                    <button id="restart">Restart</button>
+                    <button id="confirm">Proceed</button>
+                </div>
             
-                <button id="restart">Restart</button>
+            </div>
+
+            <div class="signature">
+                <a href="https://github.com/robertompfm">by robertompfm</a>
             </div>
 
         </div>

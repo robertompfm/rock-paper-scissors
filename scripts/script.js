@@ -38,93 +38,126 @@ function setLosses(num) {
     document.querySelector('.losses').lastElementChild.textContent = num;
 }
 
-function setPlayerChoiceMsg(str) {
+function getPlayerChoice() {
+    return document.querySelector('.player-choice').textContent;
+}
+
+function isYourTurn() {
+    return document.querySelector('.turn').firstElementChild.textContent === 'Your turn!';
+}
+
+function toggleYourTurn() {
+    if (isYourTurn()) {
+        document.querySelector('.turn').firstElementChild.textContent = '';
+    } else {
+        document.querySelector('.turn').firstElementChild.textContent = 'Your turn!';
+    }
+}
+
+function makeSelection(e) {
+    if (getResult() !== '') resetGame();
+    if (!isYourTurn()) proceed();
+    let str = capitalize(e.target.id);
+    setPlayerChoice(str);
+    setFeedbackMsg('');
+}
+
+function setPlayerChoice(str) {
     document.querySelector('.player-choice').textContent = str;
 }
 
-function setComputerChoiceMsg(str) {
+function setComputerChoice(str) {
     document.querySelector('.computer-choice').textContent = str;
 }
 
-function setResultMsg(str) {
+function setFeedbackMsg(str) {
+    document.querySelector('.feedback').textContent = str;
+}
+
+function getResult() {
+    return document.querySelector('.result').textContent;
+}
+
+function setResult(str) {
     document.querySelector('.result').textContent = str;
-}
-
-function getOverallResult() {
-    return document.querySelector('.overall-result').textContent;
-}
-
-function setOverallResult(str) {
-    document.querySelector('.overall-result').textContent = str;
 }
 
 function resetGame() {
     setWins(0);
     setTies(0);
     setLosses(0);
-    setPlayerChoiceMsg('');
-    setComputerChoiceMsg('');
-    setResultMsg('');
-    setOverallResult('');
+    clearChoices();
 }
 
 function updateResults(playerSelection, computerSelection) {
-    setPlayerChoiceMsg('You chose ' + playerSelection);
-    setComputerChoiceMsg('Computer chose ' + computerSelection);
+    // setPlayerChoice(playerSelection);
+    setComputerChoice(computerSelection);
 
     let playerSelIdx = OPTIONS.indexOf(playerSelection.toUpperCase());
     let computerSelIdx = OPTIONS.indexOf(computerSelection.toUpperCase());
 
     if ((playerSelIdx + 2) % 3 === computerSelIdx) {
-        setResultMsg(`You Win! ${playerSelection} beats ${computerSelection}`);
+        setFeedbackMsg(`You Win! ${playerSelection} beats ${computerSelection}`);
         setWins(getWins() + 1);
     } else if (playerSelIdx === computerSelIdx) {
-        setResultMsg(`Its a Tie! Both played ${playerSelection}`);
+        setFeedbackMsg(`Its a Tie! Both played ${playerSelection}`);
         setTies(getTies() + 1);
     } else {
-        setResultMsg(`You Lose! ${computerSelection} beats ${playerSelection}`);
+        setFeedbackMsg(`You Lose! ${computerSelection} beats ${playerSelection}`);
         setLosses(getLosses() + 1);
     }
 
     if (getWins() >= 5) {
-        setOverallResult('You are the champion!! You won 5 games first :D');
+        setResult('You are the champion!! You won 5 games first :D');
     } else if (getLosses() >= 5) {
-        setOverallResult('The computer is the champion!! You lost 5 games :/');
+        setResult('The computer is the champion!! You lost 5 games :/');
+    }
+}
+
+function clearChoices() {
+    setPlayerChoice('');
+    setComputerChoice('');
+    setFeedbackMsg('');
+    setResult('');
+}
+
+function proceed(e) {
+    if (isYourTurn()) {
+        playRound(e);
+    } else {
+        clearChoices();
+        toggleYourTurn();
     }
 }
 
 function playRound(e) {
-    if (getOverallResult() !== '') resetGame();
+    if (getResult() !== '') resetGame();
     
-    let playerSelection = capitalize(e.target.parentElement.id);
+    let playerSelection = getPlayerChoice();
+    if (playerSelection == '') {
+        setFeedbackMsg('You need to choose one option')
+        return
+    }
+
     let computerSelection = capitalize(computerPlay());
     
-    updateResults(playerSelection, computerSelection);    
-}
-
-function game(num = 5) {
-    for (let i = 0; i < num; i++) {
-        console.log(`ROUND ${i + 1}:`)
-        
-        let playerSelection = getPlayerSelection();
-        let computerSelection = computerPlay();
-
-        showSelections(playerSelection, computerSelection);
-        
-        console.log(playRound(playerSelection, computerSelection));
-
-        console.log();
-    }
+    updateResults(playerSelection, computerSelection);
+    toggleYourTurn(); 
 }
 
 
-const buttons = document.querySelectorAll('.choice');
-buttons.forEach(btn => {
+const choiceButtons = document.querySelectorAll('.choice-btn');
+choiceButtons.forEach(btn => {
     btn.addEventListener(
         'click', 
-        playRound
+        makeSelection
     )
 });
 
+const confirmBtn = document.querySelector('#confirm');
+confirmBtn.addEventListener('click', proceed);
+
 const restartBtn = document.querySelector('#restart');
-restartBtn.addEventListener('click', resetGame)
+restartBtn.addEventListener('click', resetGame);
+
+resetGame();

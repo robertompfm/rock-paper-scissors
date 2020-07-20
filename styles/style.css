@@ -1,3 +1,5 @@
+/* GENERAL SETTINGS */
+
 *,
 *::before,
 *::after {
@@ -8,6 +10,8 @@ html {
     font-size: 62.5%;
 }
 
+/* BACK GROUND */
+
 body {
     box-sizing: border-box;
     position: relative;
@@ -17,25 +21,20 @@ body {
     background-image: linear-gradient(185deg, #c77521, #9a541a);
 }
 
+/* GAME PAD FRAME */
+
 .frame {
     position: absolute;
     left: 50%;
     top: 2rem;
 
     transform: translateX(-50%);
-    /* border-top: solid 2rem transparent;
-    border-bottom: solid 2rem #444; */
     border-radius: 5rem;
 
     width: 50rem;
     height: 50rem;
     background-color: #ddd;
     background-image: linear-gradient(185deg, #eee, #aaa);
-
-    /* clip-path: polygon(
-        5% 0, 95% 0, 100% 5%, 100% 95%, 
-        95% 100%, 5% 100%, 0 95%, 0 5%
-        ); */
 
     box-shadow: -1rem 3.5rem 1rem rgba(0, 0, 0, .5),
                 0 2rem 0 0 #888;
@@ -54,14 +53,17 @@ body {
     text-shadow: 0 0 .5px #000;
 }
 
+/* SCREEN */
+
 .screen {
     width: 80%;
-    height: 60%;
+    height: 50%;
     border: solid 2px #636363;
     position: relative;
     font-family: 'Press Start 2P', cursive;
     background-image: linear-gradient(185deg, #464646, #252525);
-    box-shadow: inset 3rem 4rem 5rem -3rem rgba(255, 255, 255, 0.5);
+    box-shadow: inset -3rem 4rem 5rem -3rem rgba(0, 0, 0, 0.5),
+                inset 2.5rem -3rem 5rem -3rem rgba(255, 255, 255, 0.5);
     color: rgba(255, 255, 255, 0.7);
 }
 
@@ -73,52 +75,11 @@ body {
     left: 1rem;
 }
 
-.results {
+.turn {
+    /* border: solid 1px; */
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 1px solid gray;
-    width: 90%;
-    height: 50%;
-    display: grid;
-    grid-template-columns: 45% auto 45%;
-}
-
-.column {
-    border: solid 1px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.column__title {
-    border: solid 1px;
-    line-height: 3rem;
-    height: 25%;
-}
-
-.column__paragraph {
-    border: solid 1px;
-    height: 75%;
-    line-height: 8.5rem;
-    font-size: 2rem;
-}
-
-.versus {
-    border: solid 1px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-}
-
-.overall-result {
-    font-size: 1.8rem;
-}
-
-#restart {
-    color: black;
+    top: 1.5rem;
+    right: 1.5rem;
 }
 
 .wins, .ties, .losses {
@@ -127,12 +88,149 @@ body {
     justify-content: space-between;
 }
 
-button {
-    margin: .5rem;
+.choices {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 25%;
+    display: grid;
+    grid-template-columns: 45% auto 45%;
 }
 
-button i {
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.column__title {
+    line-height: 2.2rem;
+    height: 40%;
+}
+
+.column__paragraph {
+    height: 60%;
+    line-height: 3.5rem;
     font-size: 2rem;
 }
 
+.results {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    width: 90%;
+    height: 40%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
 
+.results__row {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+}
+
+.result {
+    font-size: 1.4rem;
+    line-height: 2rem;
+    text-align: center;
+}
+
+.feedback {
+    line-height: 1.8rem;
+    text-align: center;
+}
+
+
+/* BUTTONS */
+
+.buttons {
+    width: 80%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons h2 {
+    font-weight: 600;
+    line-height: 2.5rem;
+    color: black;
+    text-shadow: 0 0 .1rem black;
+}
+
+.choice-buttons {
+    height: 50%;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.choice-btn {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    font-size: 2.5rem;
+}
+
+.general-buttons {
+    height: 30%;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.general-buttons button {
+    width: 8.5rem;
+    font-weight: 600;
+}
+
+button {
+    margin: .5rem;
+    border: none;
+    background-color: #ddd;
+    background-image: linear-gradient(185deg,
+                                    rgb(131, 131, 131), 
+                                    rgb(70, 70, 70));
+
+    box-shadow: -.2rem .5rem 1rem rgba(0, 0, 0, .5),
+                0 .3rem 0 0 rgb(61, 61, 61);
+
+    
+    color: #ccc;
+    transition: all 0.05s;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:active {
+    box-shadow: none;
+    transform: translateY(.5rem);
+}
+
+.signature {
+    position: absolute;
+    /* border: solid 1px; */
+    bottom: 2rem;
+}
+
+.signature a,
+.signature a:visited {
+    text-decoration: none;
+    font-weight: 800;
+    line-height: 2rem;
+    color: black;
+    text-shadow: 0 0 .1rem black;
+}
