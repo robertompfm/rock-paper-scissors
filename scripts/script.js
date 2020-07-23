@@ -55,7 +55,6 @@ function toggleYourTurn() {
 }
 
 function makeSelection(e) {
-    if (getResult() !== '') resetGame();
     if (!isYourTurn()) proceed();
     let str = capitalize(e.target.id);
     setPlayerChoice(str);
@@ -87,10 +86,12 @@ function resetGame() {
     setTies(0);
     setLosses(0);
     clearChoices();
+    if (!isYourTurn()) {
+        toggleYourTurn();
+    }
 }
 
 function updateResults(playerSelection, computerSelection) {
-    // setPlayerChoice(playerSelection);
     setComputerChoice(computerSelection);
 
     let playerSelIdx = OPTIONS.indexOf(playerSelection.toUpperCase());
@@ -122,6 +123,10 @@ function clearChoices() {
 }
 
 function proceed(e) {
+    if (getResult() !== '') {
+        resetGame();
+        return;
+    }
     if (isYourTurn()) {
         playRound(e);
     } else {
